@@ -9,10 +9,31 @@ app.get('/', (req, res) => {
 app.get('/nueva-ruta', (req, res) => {
   res.send('Hola soy una nueva ruta o nuevo endpoint');
 });
-app.get('/productos', (req, res) => {
+app.get('/products', (req, res) => {
+  res.json([
+    {
+      name: 'producrto 1',
+      price: 1000,
+    },
+    {
+      name: 'producrto 2',
+      price: 2000,
+    },
+  ]);
+});
+app.get('/products/:id', (req, res) => {
+  const { id } = req.params;
   res.json({
-    name: 'producrto 1',
-    price: 1000,
+    id,
+    name: 'producrto 2',
+    price: 2000,
+  });
+});
+app.get('/categories/:categoryId/products/:productId', (req, res) => {
+  const { categoryId, productId } = req.params;
+  res.json({
+    categoryId,
+    productId,
   });
 });
 
