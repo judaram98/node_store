@@ -6,12 +6,12 @@ const port = 3000; //Se selecciona el puerto en el cual desplegar la app
 app.use(express.json());
 
 //Ahora se envia una respuesta por emdio de un callback
-app.get('/', (req, res) => {
-  res.send('Hola mi server en express');
-});
-app.get('/nueva-ruta', (req, res) => {
-  res.send('Hola soy una nueva ruta o nuevo endpoint');
-});
+// app.get('/', (req, res) => {
+//   res.send('Hola mi server en express');
+// });
+// app.get('/nueva-ruta', (req, res) => {
+//   res.send('Hola soy una nueva ruta o nuevo endpoint');
+// });
 
 routerApi(app);
 
