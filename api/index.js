@@ -7,29 +7,29 @@ const {
   boomErrorHandler,
 } = require('./middlewares/error.handler');
 const app = express(); //Se crea la app con express
-const port = 3000; //Se selecciona el puerto en el cual desplegar la app
+const port = process.env.PORT || 3000; //Se selecciona el puerto en el cual desplegar la app
 
 app.use(express.json());
 
 const whitelist = ['http://localhost:8080', 'https://myapp.co'];
 const options = {
   origin: (origin, callback) => {
-    if (whitelist.includes(origin)) {
+    if (whitelist.includes(origin) || !origin) {
       callback(null, true);
     } else {
-      callback(new Error('no Permitido'));
+      callback(new Error('No permitido'));
     }
   },
 };
 app.use(cors(options));
 
-//Ahora se envia una respuesta por emdio de un callback
-// app.get('/', (req, res) => {
-//   res.send('Hola mi server en express');
-// });
-// app.get('/nueva-ruta', (req, res) => {
-//   res.send('Hola soy una nueva ruta o nuevo endpoint');
-// });
+// Ahora se envia una respuesta por emdio de un callback
+app.get('/api', (req, res) => {
+  res.send('Hola mi server en express');
+});
+app.get('/api/nueva-ruta', (req, res) => {
+  res.send('Hola soy una nueva ruta o nuevo endpoint');
+});
 
 routerApi(app);
 app.use(logErrors);
